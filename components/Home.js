@@ -4,13 +4,34 @@ import {
   StyleSheet,
   View,
   Text,
+  Button
 } from 'react-native';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-community/google-signin';
 
 export default class HomeScreen extends React.Component{
+
+  signOut = async () => {
+    try {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+      this.setState({ user: null }); // Remember to remove the user from your app's state as well
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
     render(){
       return(
         <View style={styles.Container}>
           <Text>Home</Text>
+          <Button 
+          title="Logout"
+          onPress={this.signOut}>
+          </Button>
         </View>
       );
     }
