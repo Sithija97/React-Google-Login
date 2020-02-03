@@ -4,6 +4,7 @@ import {
   StyleSheet,
   View,
   Text,
+  Image,
   Button
 } from 'react-native';
 import {
@@ -26,9 +27,19 @@ export default class HomeScreen extends React.Component{
   };
 
     render(){
+      const userInfo = this.props.navigation.getParam("userInfo")
+
       return(
         <View style={styles.Container}>
-          <Text>Home</Text>
+          <Text style={{fontWeight: "bold"}}>Home</Text>
+      <Text>{userInfo && userInfo.user && userInfo.user.email}</Text>
+      <Text>{userInfo && userInfo.user && userInfo.user.name}</Text>
+      { userInfo && userInfo.user && 
+      <Image
+      style={{width: "50%",height: 250}}
+      source={{uri: userInfo.user.photo}}
+    /> 
+      }
           <Button 
           title="Logout"
           onPress={this.signOut}>

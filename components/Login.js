@@ -31,7 +31,9 @@ export default class LoginScreen extends React.Component {
       const userInfo = await GoogleSignin.signIn();
       this.setState({userInfo});
       console.log(userInfo);
-      this.props.navigation.navigate('Home');
+      this.props.navigation.navigate('Home',{
+        userInfo: userInfo
+      });
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
